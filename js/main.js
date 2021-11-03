@@ -141,14 +141,30 @@ floatingObject('.floating3', 1.5, 20)
 //참고      https://cdnjs.com/libraries/ScrollMagic
 //          https://github.com/janpaepke/ScrollMagic?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library
 // new ScrollMagic.Controller();
-const spyEls = document.querySelectorAll('section.scroll-spy')
-spyEls.forEach((spyEl) => {
-    new ScrollMagic.Scene({ //감시하게될 장면을 추가
-            triggerElement: spyEl, //감시할 요소
-            triggerHook: .8 //화면의 80%지점에서 보여짐 여부 감시
-        })
-        .setClassToggle(spyEl, 'show') //요소가 화면에 보여지도록 설정
-        .addTo(new ScrollMagic.controller()); // assign the scene to the controller
-})
+const spyEls = document.querySelectorAll('section.scroll-spy');
+spyEls.forEach(function(spyEl) {
+  new ScrollMagic
+  .Scene({                      //감시할 장면(Scene)을 추가
+    triggerElement: spyEl,      //감시할 요소 지정
+    triggerHook: .8             //화면의 80% 지점에서 보여짐 여부 감시
+  })
+  .setClassToggle(spyEl, 'show')            // 요소가 화면에 보이면 show 클래스 추가
+  .addTo(new ScrollMagic.Controller());                     // 컨트롤러에 장면을 할당(필수!)
+});
+/*********************************************** */
+//AWARDS SECTION 가로 슬라이더 추가
+new Swiper('.awards .swiper-container', {
+  // direction: 'horizontal', // 수평 슬라이드 : 기본값
+  autoplay: true,
+  loop: true,
+  spaceBetween: 30,
+  slidesPerView: 5,
+  navigation: {
+    prevEl: '.awards .swiper-prev',
+    nextEl: '.awards .swiper-next'
+  }
+});
 
-
+// 당해년도 가져오기
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear();
